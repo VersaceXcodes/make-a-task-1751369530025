@@ -5,9 +5,6 @@ import { Provider } from 'zustand';
 
 // Import views
 import UV_TaskList from '@/components/views/UV_TaskList.tsx';
-import UV_TaskCreationModal from '@/components/views/UV_TaskCreationModal.tsx';
-import UV_TaskEditModal from '@/components/views/UV_TaskEditModal.tsx';
-import UV_TaskDeletionConfirmationModal from '@/components/views/UV_TaskDeletionConfirmationModal.tsx';
 
 // Import a potential NotFound component
 // import NotFoundView from '@/components/views/NotFoundView.tsx';
