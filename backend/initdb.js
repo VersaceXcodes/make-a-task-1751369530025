@@ -1,11 +1,9 @@
+import dotenv from "dotenv";
 import fs from "fs";
-import { createRequire } from 'module';
-
-import('dotenv').then(dotenv => dotenv.config());
-
-const require = createRequire(import.meta.url);
-const pg = require('pg');
+import pg from 'pg';
 const { Pool } = pg;
+
+dotenv.config();
 
 const { DATABASE_URL, PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PGPORT = 5432 } = process.env;
 
