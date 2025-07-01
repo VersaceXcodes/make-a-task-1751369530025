@@ -1,9 +1,8 @@
-import dotenv from "dotenv";
 import fs from "fs";
 import pg from 'pg';
 const { Pool } = pg;
 
-dotenv.config();
+import('dotenv').then(dotenv => dotenv.config());
 
 const { DATABASE_URL, PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PGPORT = 5432 } = process.env;
 
@@ -58,4 +57,3 @@ async function initDb() {
 
 // Execute initialization
 initDb().catch(console.error);
-
