@@ -1,6 +1,6 @@
-import dotenv from "dotenv";
-import fs from "fs";
-import pg from 'pg';
+const dotenv = require('dotenv');
+const fs = require('fs');
+const pg = require('pg');
 const { Pool } = pg;
 
 dotenv.config();
@@ -58,4 +58,3 @@ async function initDb() {
 
 // Execute initialization
 initDb().catch(console.error);
-
