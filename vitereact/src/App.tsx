@@ -14,7 +14,7 @@ import UV_TaskDeletionConfirmationModal from '@/components/views/UV_TaskDeletion
 
 // Import your Zustand store
 // Assuming your store is defined in a file like '@/store/taskStore.ts' and exported as 'useTaskStore'
-import { useTaskStore } from '@/store/taskStore'; // Adjust the import path as needed
+import { useAppStore } from '@/store/main'; // Adjust the import path as needed
 
 // Initialize QueryClient
 const queryClient = new QueryClient({
@@ -90,7 +90,7 @@ const App: React.FC = () => {
         // Wrap with BrowserRouter for routing
         <BrowserRouter>
             {/* Provide the Zustand store to the application */}
-            <Provider store={useTaskStore}>
+            <Provider store={useAppStore}>
                 <QueryClientProvider client={queryClient}>
                     {/*
                         ErrorBoundary catches errors from components rendered below it.
@@ -136,4 +136,3 @@ const App: React.FC = () => {
 };
 
 export default App;
-
