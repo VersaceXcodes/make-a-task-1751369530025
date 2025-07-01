@@ -1,11 +1,10 @@
-import express from 'express';
-import cors from "cors";
-import dotenv from "dotenv";
-import fs from "fs";
-import pkg from 'pg';
-const { Pool } = pkg;
-import path from 'path';
-import { fileURLToPath } from 'url';
+const express = require('express');
+const cors = require('cors');
+const dotenv = require('dotenv');
+const fs = require('fs');
+const pg = require('pg');
+const { Pool } = pg;
+const path = require('path');
 
 dotenv.config();
 
@@ -31,10 +30,6 @@ const client = await pool.connect();
 
 const app = express();
 
-// ESM workaround for __dirname
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json({ limit: "5mb" }));
@@ -54,4 +49,3 @@ app.get('*', (req, res) => {
 app.listen(3000, '0.0.0.0', () => {
   console.log(`Server running on port 3000 and listening on 0.0.0.0`);
 });
-
