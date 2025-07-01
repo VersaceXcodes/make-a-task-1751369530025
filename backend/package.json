@@ -6,7 +6,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "start": "node initdb && nodemon server"
+    "start": "nodemon server"
   },
   "nodemonConfig": {
     "ignore": [
