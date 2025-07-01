@@ -26,26 +26,30 @@ const pool = new Pool(
       }
 );
 
-const client = await pool.connect();
+async function startServer() {
+  const client = await pool.connect();
 
-const app = express();
+  const app = express();
 
-const port = process.env.PORT || 3000;
-app.use(cors());
-app.use(express.json({ limit: "5mb" }));
+  const port = process.env.PORT || 3000;
+  app.use(cors());
+  app.use(express.json({ limit: "5mb" }));
 
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
+  // Serve static files from the 'public' directory
+  app.use(express.static(path.join(__dirname, 'public')));
 
-app.get("/", (req, res) => {
-  res.json({ message: "cofounder backend boilerplate :)" });
-});
+  app.get("/", (req, res) => {
+    res.json({ message: "cofounder backend boilerplate :)" });
+  });
 
-// Catch-all route for SPA routing
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'public', 'index.html'));
-});
-// Start the server
-app.listen(3000, '0.0.0.0', () => {
-  console.log(`Server running on port 3000 and listening on 0.0.0.0`);
-});
+  // Catch-all route for SPA routing
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+  });
+  // Start the server
+  app.listen(3000, '0.0.0.0', () => {
+    console.log(`Server running on port 3000 and listening on 0.0.0.0`);
+  });
+}
+
+startServer();
