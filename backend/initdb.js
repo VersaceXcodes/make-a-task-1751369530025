@@ -57,3 +57,4 @@ async function initDb() {
 
 // Execute initialization
 initDb().catch(console.error);
+
