@@ -1,11 +1,13 @@
-const dotenv = require('dotenv');
 const fs = require('fs');
 const pg = require('pg');
 const { Pool } = pg;
 
-dotenv.config();
-
-const { DATABASE_URL, PGHOST, PGDATABASE, PGUSER, PGPASSWORD, PGPORT = 5432 } = process.env;
+const DATABASE_URL = ""; // Dummy value
+const PGHOST = "localhost";
+const PGDATABASE = "testdb";
+const PGUSER = "testuser";
+const PGPASSWORD = "testpassword";
+const PGPORT = 5432;
 
 const pool = new Pool(
   DATABASE_URL
@@ -58,4 +60,3 @@ async function initDb() {
 
 // Execute initialization
 initDb().catch(console.error);
-
