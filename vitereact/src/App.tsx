@@ -87,47 +87,45 @@ const App: React.FC = () => {
         // Wrap with BrowserRouter for routing
         <BrowserRouter>
             {/* Provide the Zustand store to the application */}
-            <Provider store={useAppStore}>
-                <QueryClientProvider client={queryClient}>
+            <QueryClientProvider client={queryClient}>
+                {/*
+                    ErrorBoundary catches errors from components rendered below it.
+                    Suspense is used here as a fallback for components that might be lazy-loaded
+                    or for data fetching that uses React Query's suspense mode.
+                */}
+                <ErrorBoundary>
                     {/*
-                        ErrorBoundary catches errors from components rendered below it.
-                        Suspense is used here as a fallback for components that might be lazy-loaded
-                        or for data fetching that uses React Query's suspense mode.
+                        If using React Query suspense, you might want a global Suspense fallback
+                        for initial data loading.
                     */}
-                    <ErrorBoundary>
-                        {/*
-                            If using React Query suspense, you might want a global Suspense fallback
-                            for initial data loading.
-                        */}
-                        <Suspense fallback={
-                            <div className="flex justify-center items-center h-screen">
-                                Loading Application...
-                            </div>
-                        }>
-                            {/* Main container for structuring content */}
-                            <div className="container mx-auto p-4">
-                                <Routes>
-                                    {/* Main task list view */}
-                                    <Route path="/" element={<UV_TaskList />} />
+                    <Suspense fallback={
+                        <div className="flex justify-center items-center h-screen">
+                            Loading Application...
+                        </div>
+                    }>
+                        {/* Main container for structuring content */}
+                        <div className="container mx-auto p-4">
+                            <Routes>
+                                {/* Main task list view */}
+                                <Route path="/" element={<UV_TaskList />} />
 
-                                    {/*
-                                        Modal routes: These are currently set up to replace the entire view.
-                                        A more typical modal pattern would involve nested routes that keep
-                                        the main layout visible, or a dedicated modal context.
-                                        For direct modal rendering, ensure these components handle their own closing.
-                                    */}
-                                    <Route path="/create-task" element={<UV_TaskCreationModal />} />
-                                    <Route path="/edit-task/:task_id" element={<UV_TaskEditModal />} />
-                                    <Route path="/delete-task-confirmation" element={<UV_TaskDeletionConfirmationModal />} />
+                                {/*
+                                    Modal routes: These are currently set up to replace the entire view.
+                                    A more typical modal pattern would involve nested routes that keep
+                                    the main layout visible, or a dedicated modal context.
+                                    For direct modal rendering, ensure these components handle their own closing.
+                                */}
+                                <Route path="/create-task" element={<UV_TaskCreationModal />} />
+                                <Route path="/edit-task/:task_id" element={<UV_TaskEditModal />} />
+                                <Route path="/delete-task-confirmation" element={<UV_TaskDeletionConfirmationModal />} />
 
-                                    {/* Optional: Add a catch-all for 404 */}
-                                    {/* <Route path="*" element={<NotFoundView />} /> */}
-                                </Routes>
-                            </div>
-                        </Suspense>
-                    </ErrorBoundary>
-                </QueryClientProvider>
-            </Provider>
+                                {/* Optional: Add a catch-all for 404 */}
+                                {/* <Route path="*" element={<NotFoundView />} /> */}
+                            </Routes>
+                        </div>
+                    </Suspense>
+                </ErrorBoundary>
+            </QueryClientProvider>
         </BrowserRouter>
     );
 };
